@@ -1,74 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Number Line Integers: Add & Subtract Negatives</title>
+  <title>Number Line Practice</title>
+  <meta name="description" content="Practice integers, decimals, and fractions on the number line." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <div class="container">
-    <h1>Number Line (Integers)</h1>
-
-    <div class="intro">
-      <p><strong>Goal:</strong> Use a number line to add and subtract negative numbers.</p>
-      <p>Start at the first number. Then move right for a positive and left for a negative.</p>
-      <p class="tip">Tip: Click a tick on the number line or type the answer. Use “Show move” if you want to see the steps.</p>
-    </div>
+    <h1>Number Line</h1>
 
     <div class="controls">
-      <div class="control-left">
-        <label for="count">Problems</label>
-        <select id="count">
-          <option>6</option>
-          <option selected>10</option>
-          <option>12</option>
-          <option>15</option>
+      <div class="control-group">
+        <label for="mode">Mode</label>
+        <select id="mode">
+          <option value="integers" selected>Integers</option>
+          <option value="decimals">Decimals</option>
+          <option value="fractions">Fractions</option>
+          <option value="addfractions">Adding Fractions</option>
         </select>
-
+      </div>
+      <div class="control-group">
         <label for="difficulty">Difficulty</label>
         <select id="difficulty">
           <option value="easy" selected>Easy</option>
           <option value="medium">Medium</option>
         </select>
       </div>
-
-      <div class="control-right">
-        <button class="btn btn-new" id="btnNew">New Set</button>
-        <button class="btn btn-check" id="btnCheck">Check Answers</button>
+      <div class="control-group">
+        <label for="count">Problems</label>
+        <select id="count">
+          <option>5</option>
+          <option selected>8</option>
+          <option>10</option>
+        </select>
       </div>
+      <button class="btn btn-blue" id="btnNew">New Set</button>
+      <button class="btn btn-green" id="btnCheck">Check Answers</button>
     </div>
 
-    <details class="menu">
-      <summary>More info & examples</summary>
-      <div class="menu-body">
-        <div class="menu-card">
-          <h3>Quick rules</h3>
-          <ul>
-            <li>Start at the first number.</li>
-            <li>Adding a negative = move left.</li>
-            <li>Subtracting a negative = move right.</li>
-            <li>Subtracting a positive = move left.</li>
-          </ul>
-        </div>
-        <div class="menu-card">
-          <h3>Sample (placeholder)</h3>
-          <p>Replace this later with a handwritten example.</p>
-          <img src="sample.png" alt="Sample example placeholder" />
-        </div>
-        <div class="menu-card">
-          <h3>Hints (placeholder)</h3>
-          <p>Replace this later with hint visuals.</p>
-          <img src="hints.png" alt="Hints placeholder" />
-        </div>
-      </div>
-    </details>
-
     <div id="quiz"></div>
-
     <div class="feedback" id="globalFeedback"></div>
   </div>
 
   <script src="app.js"></script>
 </body>
+
 </html>
