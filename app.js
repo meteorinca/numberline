@@ -61,12 +61,18 @@ function makeIntegers(diff) {
   } while (result < -range || result > range);
   op = sub ? "−" : "+";
   const bStr = b >= 0 ? `${b}` : `(${b})`;
+  // Only extend into negatives if the problem needs it
+  const moveAmt = sub ? -b : b;
+  const lowestVal = Math.min(a, result, moveAmt);
+  const highestVal = Math.max(a, result, moveAmt);
+  const rMin = Math.min(0, lowestVal - 1);
+  const rMax = Math.max(highestVal + 1, Math.abs(rMin));  // keep some symmetry when negative
   const ticks = [];
-  for (let i = -range; i <= range; i++) ticks.push({ value: i, label: `${i}` });
+  for (let i = rMin; i <= rMax; i++) ticks.push({ value: i, label: `${i}` });
   return {
     mode: "integers", promptText: `${a} ${op} ${bStr}`,
-    answer: result, startVal: a, moveAmt: sub ? -b : b, ticks,
-    rangeMin: -range, rangeMax: range,
+    answer: result, startVal: a, moveAmt, ticks,
+    rangeMin: rMin, rangeMax: rMax,
   };
 }
 
@@ -114,8 +120,12 @@ function makeFractions(diff) {
     num = randInt(numMin + 1, numMax - 1);
   } while (num === 0 || num % den === 0);
   const [sn, sd] = simplify(num, den);
+  // Only include negative side if the fraction is negative
+  const tickStart = (sn < 0) ? numMin : 0;
+  const tickEnd = (sn < 0) ? numMax : numMax;
+  const rMin = (sn < 0) ? -maxWhole : 0;
   const ticks = [];
-  for (let i = numMin; i <= numMax; i++) {
+  for (let i = tickStart; i <= tickEnd; i++) {
     const v = i / den;
     // Only label whole numbers — hide fraction labels so student must figure it out
     let lbl = "";
@@ -127,7 +137,7 @@ function makeFractions(diff) {
     promptHTML: `Locate ${fracHTML(sn, sd)} on the number line`,
     answer: { n: sn, d: sd }, answerVal: sn / sd,
     startVal: 0, moveAmt: sn / sd, ticks,
-    rangeMin: -maxWhole, rangeMax: maxWhole,
+    rangeMin: rMin, rangeMax: maxWhole,
   };
 }
 
